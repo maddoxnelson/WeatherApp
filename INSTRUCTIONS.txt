@@ -14,3 +14,5 @@ Please let me know if you have any questions or need any clarifications. Here ar
 JSON format: http://bugs.openweathermap.org/projects/api/wiki/Weather_Data
 
 Forecast Data: http://bugs.openweathermap.org/projects/api/wiki/Weather_Condition_Codes - For images, you can pull your own or use the ones fromhttp://openweathermap.org/img/w/<icon name returned in JSON icon>.png; so if icon is 03d then the URL to their matching image is http://openweathermap.org/img/w/03d.png)
+
+I am using the Weather Underground API instead.
