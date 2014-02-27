@@ -1,0 +1,16 @@
+Exercise:
+Build a single page jQuery "app" that nicely (but simply) animates the display of a 5 day forecast given a single input box with expected input of city,state (I should be able to keep changing the city/state to get a new forecast).  
+
+It should output for each day: the day of the week, the forecast for that day (text), a related graphic/icon tied to the forecast (e.g. rainy), the high and the low temp that day. You can use this free service to return forecast data (example call for Washington, DC):
+
+http://api.openweathermap.org/data/2.5/forecast/daily?q=Washington,dc&units=imperial&cnt=5
+
+It should have simple user input validation/messaging, clean layout (you can use your favorite CSS/HTML library like Bootstrap or Foundation) and well structured code and error handling.  
+
+Bonus points if it is also responsive and works down to a mobile phone browser. 
+
+Please let me know if you have any questions or need any clarifications. Here are some links to info about the JSON format from the API and the icons used.
+
+JSON format: http://bugs.openweathermap.org/projects/api/wiki/Weather_Data
+
+Forecast Data: http://bugs.openweathermap.org/projects/api/wiki/Weather_Condition_Codes - For images, you can pull your own or use the ones fromhttp://openweathermap.org/img/w/<icon name returned in JSON icon>.png; so if icon is 03d then the URL to their matching image is http://openweathermap.org/img/w/03d.png)

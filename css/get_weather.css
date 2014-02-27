@@ -1,0 +1,14 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  text-align: center;
+  line-height:10px;
+}
+.city_input, .app_name, #city_state{
+	text-align:center;
+}
+.error_message{
+	color:red;
+	font-style:bold;
+}
