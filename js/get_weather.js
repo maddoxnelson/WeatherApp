@@ -1,46 +1,90 @@
-$(document).ready(function(){
-	$('.get_weather').click(getMyWeather)
+var api_key = "642f6e7723b0f7d0"
+
+$('#city_state').keypress(function(e) {
+	if(e.which == 13) {
+	    $('.get_weather').click();
+	}
 });
 
 function getMyWeather(){
-	//Get variable from within city_input
-	var user_input = $('#city_state').val().toLowerCase().split(',');
+	resetScreen(null);
+	$('.loading_gif').show();
 	
-	
-	console.log(user_input)
-	
-	var send = 'http://api.wunderground.com/api/642f6e7723b0f7d0/forecast10day/q/' 
-	+ user_input[1] + '/' + encodeURIComponent(user_input[0]) + '.json';
-	
-	$.get(send,
-	function(data){
-		console.log(user_input);
-		if (data.cod == '200'){
-			console.log(data)
-			var forecast = data;
-			populateForecast(data);
-		}
-		else{
-			console.log(data)
-			$('img,.date,.weather_description,.high_low').text('').attr('src','');
-			$('.error_message').text("We couldn't find your location. Please make sure it's in the correct format.")
-		}
-	});
+	var user_input = $('#city_state').val().toLowerCase();
+
+	if(user_input.match(',')){
+		user_input = user_input.split(', ').toString().split(','),
+		     state = user_input[1],
+		      city = user_input[0],
+		       url = encodeURI('https://api.wunderground.com/api/'+ api_key 
+					 + '/forecast10day/geolookup/q/' + state + '/' + city + '.json');
+		
+		$.ajax({
+			url: url,
+			dataType: "jsonp",
+			success: function(data){
+			   if ($(data.response.error).length || $(data.response.results).length){
+				   resetScreen("no_location")
+			   }
+			   else{
+				   populateForecast(data,city);
+			   }
+		    },
+			error: function(){
+				resetScreen("ajax_error");
+			}
+	    });
+		
+		setLead("get_forecast",city)
+	}
+	else{
+		resetScreen("add_comma")
+	}
 }
 
 function populateForecast(data){
-	$('.error_message').text('');
-	$.each(data.list, function(i){
-		var forecast = this.weather[0];
-		var temp = this.temp
-		console.log(this)
-		i += 1;
-		var day = $('.forecast .day:nth-child(' + i + ')');
-		
-		day.find('img').attr('src',icon_source + forecast.icon + '.png');
-		day.find('.date').text(new Date(this.dt * 1000).toDateString());
-		day.find('.weather_description').text(forecast.main + ", " + forecast.description + '.');
-		day.find('.high_low').text("High temp: " + temp.max + "; Low temp: " + temp.min)
-		
-	})
+	$.map(data.forecast.simpleforecast.forecastday, function(forecast,i){
+		day = $('.forecast .day:nth-child(' + i + ')');
+		day.find('img').attr('src',forecast.icon_url);
+		day.find('.date').text(new Date(forecast.date.epoch * 1000).toDateString());
+		day.find('.weather_description').text(forecast.conditions);
+		day.find('.high_low').html("High: " + forecast.high.fahrenheit + "&deg;" + " Low: " + forecast.low.fahrenheit + "&deg;")
+
+		if (i == 5){
+			return false;
+		}
+	});
+	
+	setLead("showing_forecast",data.location.city,data.location.state);
+	$('.loading_gif').hide();
+	$('.forecast').show();
+}
+
+function fetchMessage(message,city,state){
+	var text = {};
+	
+	//error handling
+	text["no_location"] = "We couldn't find your location. Please make sure it's in the correct format.";
+	text["ajax_error"] = "Error retrieving weather from Weather Underground.";
+	text["add_comma"] = 'Please use a comma to separate the city and state.';
+	
+	//other messages
+	text["get_forecast"] = 'Getting your forecast for <span class="cap" style="text-transform:capitalize">' + city + '</span>...'
+	text["showing_forecast"] = 'Showing five-day forecast for <span style="text-transform:capitalize">' 
+								+ city + '</span>, ' + state + ':';
+	text["need_forecast"] = 'Need a five-day forecast?'
+	
+	return text[message];
+}
+
+function setLead(message,city,state){
+	$('.lead').html(fetchMessage(message,city,state))
+	$('.error_message').hide()
+}
+
+function resetScreen(error){
+	$('.forecast,.loading_gif').hide();
+	$('.error_message').text(fetchMessage(error)).show();
+	$('.lead').text(fetchMessage("need_forecast"));
+    $('day.img,.date,.weather_description,.high_low').text('').attr('src','');
 }

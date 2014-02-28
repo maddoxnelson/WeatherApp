@@ -24,39 +24,42 @@
 			<h1>Get My Weather</h1>
 		</div>
       	<div class="starter-template">
-        	<p class="lead">Need a 5-day forecast?
+        	<p class="lead">Need a five-day forecast?</p>
+			<small class="location_check"></small>
       	</div>
+		
+		<div class="loading_gif"><img src="img/loading.gif"></div>
 		
 		<div class="forecast">
 			<div class="day">
-				<img src="" alt="">
-				<div class="date"></div>
-				<div class="weather_description"></div>
-				<div class="high_low"></div>
+				<img src="" alt="" class="icon col-lg-2">
+				<div class="date col-lg-3"></div>
+				<div class="weather_description col-lg-3"></div>
+				<div class="high_low col-lg-4"></div>
 			</div>
 			<div class="day">
-				<img src="" alt="">
-				<div class="date"></div>
-				<div class="weather_description"></div>
-				<div class="high_low"></div>
+				<img src="" alt="" class="icon col-lg-2">
+				<div class="date col-lg-3"></div>
+				<div class="weather_description col-lg-3"></div>
+				<div class="high_low col-lg-4"></div>
 			</div>
 			<div class="day">
-				<img src="" alt="">
-				<div class="date"></div>
-				<div class="weather_description"></div>
-				<div class="high_low"></div>
+				<img src="" alt="" class="icon col-lg-2">
+				<div class="date col-lg-3"></div>
+				<div class="weather_description col-lg-3"></div>
+				<div class="high_low col-lg-4"></div>
 			</div>
 			<div class="day">
-				<img src="" alt="">
-				<div class="date"></div>
-				<div class="weather_description"></div>
-				<div class="high_low"></div>
+				<img src="" alt="" class="icon col-lg-2">
+				<div class="date col-lg-3"></div>
+				<div class="weather_description col-lg-3"></div>
+				<div class="high_low col-lg-4"></div>
 			</div>
 			<div class="day">
-				<img src="" alt="">
-				<div class="date"></div>
-				<div class="weather_description"></div>
-				<div class="high_low"></div>
+				<img src="" alt="" class="icon col-lg-2">
+				<div class="date col-lg-3"></div>
+				<div class="weather_description col-lg-3"></div>
+				<div class="high_low col-lg-4"></div>
 			</div>
 		</div>
 	  
@@ -64,9 +67,9 @@
 		  	<input type="text_area" class="form_control" id="city_state" placeholder="Enter city, state.">
 		  	<p><small>Ex: New York, New York</small></p>
 		  	<p class="error_message"></p>
-		  	<button type="button" class="btn btn-primary get_weather">Get my weather</button>
+		  	<button type="button" class="btn btn-primary get_weather" onclick="getMyWeather()">Get my weather</button>
 	  	</div>
-
+		<small>Forecast data and icons from Weather Underground. </small>
     </div><!-- /.container -->
 
 

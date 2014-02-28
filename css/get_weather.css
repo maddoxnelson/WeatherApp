@@ -1,14 +1,56 @@
 body {
   padding-top: 50px;
 }
+.loading_gif{
+	display:none;
+}
+.container{
+	text-align:center
+}
+.forecast{
+	display:none;
+}
 .starter-template {
-  text-align: center;
   line-height:10px;
 }
-.city_input, .app_name, #city_state{
+.city_input{
+	clear:both;
+	margin-top:10px;
+}
+input[type="text_area"]{
 	text-align:center;
 }
 .error_message{
 	color:red;
 	font-style:bold;
+}
+.day{
+	margin:0 auto;
+	width:39%;
+	clear:both;
+	height:75px;
+	padding: 15px 0px 0px 0px;
+}
+.day:nth-child(odd){
+	background: #bbf;
+}
+.icon,.date{
+	float:left;
+	font-weight:bold;
+}
+.icon{
+	background:white;
+	margin-left:5px;
+}
+.weather_description,.high_low{
+	float:right;
+}
+
+@media (max-width: 1000px){
+	.day{
+		width:100%;
+	}
+	.icon,.date{
+	
+	}
 }
