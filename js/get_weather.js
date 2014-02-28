@@ -27,7 +27,7 @@ function getMyWeather(){
 				   resetScreen("no_location")
 			   }
 			   else{
-				   populateForecast(data,city);
+				   populateForecast(data);
 			   }
 		    },
 			error: function(){
