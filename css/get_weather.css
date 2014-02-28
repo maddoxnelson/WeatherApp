@@ -29,7 +29,7 @@ input[type="text_area"]{
 	width:39%;
 	clear:both;
 	height:75px;
-	padding: 15px 0px 0px 0px;
+	padding: 15px 5px 0px 0px;
 }
 .day:nth-child(odd){
 	background: #bbf;
@@ -41,6 +41,7 @@ input[type="text_area"]{
 .icon{
 	background:white;
 	margin-left:5px;
+	margin-right:5px;
 }
 .weather_description,.high_low{
 	float:right;

@@ -57,7 +57,7 @@ function populateForecast(data){
 	
 	setLead("showing_forecast",data.location.city,data.location.state);
 	$('.loading_gif').hide();
-	$('.forecast').show();
+	$('.forecast').slideDown('slow');
 }
 
 function fetchMessage(message,city,state){
