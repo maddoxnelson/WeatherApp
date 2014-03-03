@@ -27,7 +27,7 @@ function getMyWeather(){
 				   resetScreen("no_location")
 			   }
 			   else{
-				   populateForecast(data);
+				   populateForecast(data,1);
 			   }
 		    },
 			error: function(){
@@ -42,19 +42,17 @@ function getMyWeather(){
 	}
 }
 
-function populateForecast(data){
-	$.map(data.forecast.simpleforecast.forecastday, function(forecast,i){
-		day = $('.forecast .day:nth-child(' + i + ')');
+function populateForecast(data,i){
+	for(var i = 0; i <= 5; i ++){
+		var forecast = data.forecast.simpleforecast.forecastday[i],
+		    day = $('.forecast .day:nth-child(' + (i + 1) + ')');
+				 
 		day.find('img').attr('src',forecast.icon_url);
 		day.find('.date').text(new Date(forecast.date.epoch * 1000).toDateString());
 		day.find('.weather_description').text(forecast.conditions);
 		day.find('.high_low').html("High: " + forecast.high.fahrenheit + "&deg;" + " Low: " + forecast.low.fahrenheit + "&deg;")
+	}
 
-		if (i == 5){
-			return false;
-		}
-	});
-	
 	setLead("showing_forecast",data.location.city,data.location.state);
 	$('.loading_gif').hide();
 	$('.forecast').slideDown('slow');
@@ -86,5 +84,5 @@ function resetScreen(error){
 	$('.forecast,.loading_gif').hide();
 	$('.error_message').text(fetchMessage(error)).show();
 	$('.lead').text(fetchMessage("need_forecast"));
-    $('day.img,.date,.weather_description,.high_low').text('').attr('src','');
+    $('.day.img,.date,.weather_description,.high_low').text('').attr('src','');
 }
